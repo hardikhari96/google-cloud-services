@@ -1,3 +1,4 @@
-credantials/*
+credantials/.env
+credantials/*.json
 node_modules
 main.rest
