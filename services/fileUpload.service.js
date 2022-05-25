@@ -1,5 +1,5 @@
 const util = require('util')
-const gc = require('../config/gc.config')
+const gc = require('../config/gc.config').gStorage
 const path = require('path');
 require('dotenv').config({path:path.join(__dirname,'../credantials/.env')})
 const bucket = gc.bucket(process.env.GOOGLE_CLOUD_BUCKET_NAME) // should be your bucket name
@@ -23,7 +23,7 @@ const googleCloudFileUplaod = (file) => new Promise((resolve, reject) => {
         const publicUrl = util.format(
             `https://storage.googleapis.com/${bucket.name}/${blob.name}`
         )
-        resolve(publicUrl)
+        resolve({publicUrl,filename:blob.name,bucketName:bucket.name})
     })
         .on('error', (err) => {
             reject(err.message)
