@@ -5,7 +5,8 @@ const visionControllers = require('../controllers/vision.controller');
 const index = express.Router();
 
 index.post('/upload/singleFile', uploadControllers.uploadFile);
-index.post('/vision/detectText',visionControllers.uploadFile)
+index.post('/vision/detectText',visionControllers.uploadFileFetchText)
+index.post('/vision/detectLandMark',visionControllers.uploadFileFetchLandMark)
 
 index.get('/', indexControllers.mainpage)
 
