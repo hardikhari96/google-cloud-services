@@ -1,7 +1,6 @@
-const { uploadImage } = require("../services/fileUpload.service");
+const { uploadImage ,getUploadUrl,getGetUrl} = require("../services/fileUpload.service");
 
 var exports = {};
-
 
 exports.uploadFile = async (req, res, next) => {
     try {
@@ -12,11 +11,20 @@ exports.uploadFile = async (req, res, next) => {
             .status(200)
             .json({
                 message: "Upload was successful",
-                data: imageUrl
+                main:await getGetUrl(imageUrl.filename),
+                data: imageUrl,
             })
     } catch (error) {
         console.log(error)
         next(error)
+    }
+}
+
+exports.getUploadUrl = async (req, res, next) => {
+    try {
+        res.json(await getUploadUrl(req.query.name))
+    } catch (error) {
+        res.json(error)   
     }
 }
 
